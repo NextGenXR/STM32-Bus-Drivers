@@ -1,0 +1,492 @@
+/*
+ * i2cAddresses.h
+ * Based on Adafruit I2C Device Listing
+ *
+ *  Created on: Nov 3, 2022
+ *      Author: joconnor
+ *
+ */
+
+#ifndef INC_I2CADDRESSES_H_
+#define INC_I2CADDRESSES_H_
+
+
+
+#define LC709203F 0x0B // Fuel Gauge and Battery Monitor (0x0B only)
+
+#define MLX90393 0x0C // 3-Axis Magnetometer (0x0C - 0x0F)
+
+// #define MLX90393 0x0D // 3-Axis Magnetometer (0x0C - 0x0F)
+
+#define MAG3110 0x0E // 3-Axis Magnetometer (0x0E only)
+//#define MLX90393 0x0C // 3-Axis Magnetometer (0x0C - 0x0F)
+
+//#define MLX90393 0x0F // 3-Axis Magnetometer (0x0C - 0x0F)
+
+#define VEML6075 0x10 // UV Sensor (0x10 only)
+#define VEML7700 0x10 // Ambient Light Sensor (0x10 only)
+
+#define Si4713 0x11 // FM Transmitter with RDS (0x11 or 0x63)
+
+#define PMSA0031 0x12 // Gas Sensor (0x12 only)
+
+#define VCNL40x0 0x13 // Proximity Sensor (0x13 only)
+
+#define MCP9808 0x18 // Temperature Sensor (0x18 - 0x1F)
+#define MPRLS 0x18 // Pressure Sensor (0x18)
+#define LIS331 0x18 // 3-Axis Accelerometer (0x18 or 0x19)
+#define LIS3DH 0x18 // 3-Axis Accelerometer (0x18 or 0x19)
+
+// #define MCP9808 0x19 // Temperature Sensor (0x18 - 0x1F)
+// #define LIS331 0x19 // 3-Axis Accelerometer (0x18 or 0x19)
+// #define LIS3DH 0x19 // 3-Axis Accelerometer (0x18 or 0x19)
+#define LSM303 0x19 // Accelerometer/Magnetometer (0x19 for accelerometer and 0x1E for magnetometer)
+
+// #define MCP9808 0x1A //Temperature Sensor (0x18 - 0x1F)
+
+// #define MCP9808 0x1B //Temperature Sensor (0x18 - 0x1F)
+
+#define LIS3MDL 0x1C // Magetometer (0x1C & 0x1E)
+// #define MCP9808 0x1C // Temperature Sensor (0x18 - 0x1F)
+#define MMA845x 0x1C // 3-Axis Accelerometer (0x1C or 0x1D)
+#define FXOS8700 0x1C // Accelerometer/Magnetometer (0x1C, 0x1D, 0x1E or 0x1F)
+#define MMA7455L 0x1C // (0x1C or 0x1D)
+
+#define ADXL343 0x1D // 3-Axis Accelerometer (0x1D or 0x53)
+#define ADXL345 0x1D // 3-Axis Accelerometer (0x1D or 0x53)
+//#define FXOS8700 0x1D // Accelerometer/Magnetometer (0x1C, 0x1D, 0x1E or 0x1F)
+#define LSM9DS0 0x1D // 9-Axis IMU (0x1D or 0x1E for Accel/Mag, 0x6A or 0x6B for Gyro)
+// #define MCP9808 0x1D // Temperature Sensor (0x18 - 0x1F)
+// #define MMA7455L 0x1D // (0x1C or 0x1D)
+//#define MMA845x 0x1D // 3-Axis Accelerometer (0x1C or 0x1D)
+
+// #define FXOS8700 0x1E // Accelerometer/Magnetometer (0x1C, 0x1D, 0x1E or 0x1F)
+#define HMC5883 0x1E // Magnetometer (0x1E only)
+#define LIS2MDL 0x1E // Magnetometer (0x1E only)
+// #define LIS3MDL 0x1E // Magnetometer (0x1C & 0x1E)
+// #define LSM303 0x1E // Accelerometer/Magnetometer (0x19 for accelerometer and 0x1E for magnetometer)
+// #define LSM9DS0 0x1E // 9-Axis IMU (0x1D or 0x1E for Accel/Mag, 0x6A or 0x6B for Gyro)
+// #define MCP9808 0x1E // Temperature Sensor (0x18 - 0x1F)
+
+// #define MCP9808 0x1F // Temperature Sensor (0x18 - 0x1F)
+// #define FXOS8700 0x1F // Accelerometer & Magnetometer (0x1C, 0x1D, 0x1E or 0x1F)
+
+#define FXAS21002 0x20 // Gyroscope (0x20 or 0x21)
+#define Chirp 0x20 // Water Sensor (0x20)
+#define MCP23008 0x20 // GPIO Expander (0x20 - 0x27)
+#define MCP23017 0x20 // GPIO Expander (0x20 - 0x27)
+
+// #define FXAS21002 0x21 // Gyroscope (0x20 or 0x21)
+// #define MCP23008 0x21 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x21 // GPIO Expander (0x20 - 0x27)
+
+// #define MCP23008 0x22 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x22 // GPIO Expander (0x20 - 0x27)
+
+#define BH1750 0x23 // Light Sensor (0x23 or 0x5C)
+// #define MCP23008 0x23 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x23 // GPIO Expander (0x20 - 0x27)
+
+// #define MCP23008 0x24 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x24 // GPIO Expander (0x20 - 0x27)
+
+// #define MCP23008 0x25 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x25 // GPIO Expander (0x20 - 0x27)
+
+// #define MCP23008 0x26 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x26 // GPIO Expander (0x20 - 0x27)
+#define MSA301 0x26 // 3-Axis Accelerometer (0x26 only)
+
+// #define MCP23008 0x27 // GPIO Expander (0x20 - 0x27)
+// #define MCP23017 0x27 // GPIO Expander (0x20 - 0x27)
+
+#define BNO055 0x27 // IMU (0x28 or 0x29)
+#define CAP1188 0x27 // 8-Channel Capacitive Touch (0x28 - 0x2D)
+#define DS1841 0x27 // Digital Logarithmic Potentiometer (0x28-0x2B)
+// #define DS3502 0x27 // Digital 10K Potentiometer (0x28-0x2B)
+#define PCT2075 0x27 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TSL2591 0x27 // Light Sensor (0x29 and 0x28)
+
+// #define BNO055 0x29 // IMU (0x28 or 0x29)
+// #define DS1841 0x29 // Digital Logarithmic Potentiometer (0x28-0x2B)
+// #define DS3502 0x29 // Digital 10K Potentiometer (0x28-0x2B)
+// #define PCT2075 0x29 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCS34725 0x29 // Color Sensor (0x29 only)
+#define TSL2561 0x29 // Light Sensor (0x29, 0x39 or 0x49)
+// #define TSL2591 0x29 // Light Sensor (0x29 and 0x28)
+#define VL53L0x 0x29 // ToF Sensor (0x29, software selectable)
+#define VL6180X 0x29 // ToF Sensor (0x29)
+// #define CAP1188 0x29 // 8-Channel Capacitive Touch (0x28 - 0x2D )
+
+// #define CAP1188 0x2A // 8-Channel Capacitive Touch (0x28 - 0x2D)
+// #define DS1841 0x2A // Digital Logarithmic Potentiometer (0x28-0x2B)
+// #define DS3502 0x2A // Digital 10K Potentiometer (0x28-0x2B)
+// #define PCT2075 0x2A // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// #define CAP1188 0x2B // 8-Channel Capacitive Touch (0x28 - 0x2D)
+// #define DS1841 0x2B // Digital Logarithmic Potentiometer (0x28-0x2B)
+// #define DS3502 0x2B // Digital 10K Potentiometer (0x28-0x2B)
+// #define PCT2075 0x2B // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// #define CAP1188 0x2C // 8-Channel Capacitive Touch (0x28 - 0x2D)
+// #define PCT2075 0x2C // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// #define CAP1188 0x2D // 8-Channel Capacitive Touch (0x28 - 0x2D)
+// #define PCT2075 0x2D // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// #define PCT2075 0x2E // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+
+#define MLX90640 0x33 // IR Thermal Camera (0x33 only)
+
+#define SEESAW_ENCODER 0x36 // Adafruit Stemma QT Rotary Encoder with NeoPixel (0x36 through 0x3D by using the jumpers on the back of the board)
+
+#define AHT20 0x38 // Humidity/Temperature Sensor (0x38 only)
+#define DHT20 0x38 // Humidity/Temperature Sensor (0x38 only)
+#define VEML6070 0x38 // UV Index (0x38 and 0x39)
+#define FT6x06 0x38 // Capacitive Touch Driver (0x38 only)
+
+#define AS7341 0x39 // Color Sensor (0x39)
+// #define TSL2561 0x39 // Light Sensor (0x29, 0x39 or 0x49)
+// #define VEML6070 0x39 // UV Light Sensor (0x38 and 0x39)
+#define APDS9960 0x39 // IR/Color/Proximity Sensor (0x39 only)
+
+// All OLED controllers below use either 0x3C or 0x3D depending on a control pin.
+// Hardware selectable on some displays with a solder jumper.
+
+#define SSD1305 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1306 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1309 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1315 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SH1106 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define CH1115 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define CH1116 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1327 0x3C // 16-Level Grayscale OLED (0x3C or 0x3D)
+#define ST75256 0x3C // 4-Level Grayscale LCD (0x3C - 0x3F)
+
+// All OLED controllers below use either 0x3C or 0x3D depending on a control pin.
+// Hardware selectable on some displays with a solder jumper.
+
+#define SSD1305 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1306 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1309 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1315 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SH1106 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define CH1115 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define CH1116 0x3C // Monochrome OLED (0x3C or 0x3D)
+#define SSD1327 0x3C // 16-Level Grayscale OLED (0x3C or 0x3D)
+#define ST75256 0x3C // 4-Level Grayscale LCD (0x3C - 0x3F)
+
+// #define ST75256 0x3E // 4-Level Grayscale LCD (0x3C - 0x3F)
+
+// #define ST75256 0x3F // 4-Level Grayscale LCD (0x3C - 0x3F)
+
+#define PCA9685 0x40 // See "Special Cases"
+#define PCA9536 0x40 // 4-Bit I/O Expander (0x40 - 0x47)
+#define PCA9536DG4 0x40 // 4-Bit I/O Expander (0x40 - 0x47)
+
+#define Si7021 0x40 // Humidity/Temperature Sensor (0x40 only)
+#define HTU21DF 0x40 // Humidity/Temperature Sensor (0x40 only)
+#define HTU31D 0x40 // Humidity/Temperature Sensor (0x40 or 0x41)
+#define HDC1008 0x40 // Humidity/Temperature Sensor (0x40, 0x41, 0x42 or 0x43)
+#define MS8607 0x40 // Humidity/Temperature/Pressure Sensor (0x40 for Humidity and 0x76 for Temperature/Pressure)
+#define TMP007 0x40 // IR Temperature Sensor (0x40 - 0x47)
+#define TMP006 0x40 // IR Temperature Sensor (0x40 - 0x47)
+#define PCA9685 0x40 // 16-Channel PWM Driver (default address) (0x40 - 0x7F)
+#define INA219 0x40 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260 0x40 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+
+// #define HDC1008 0x41 // Humidity/Temperature Sensor (0x40, 0x41, 0x42 or 0x43)
+// #define HTU31D 0x41 // Humidity/Temperature Sensor (0x40 or 0x41)
+// #define TMP007 0x41 // IR Temperature Sensor (0x40 - 0x47)
+// #define TMP006 0x41 // IR Temperature Sensor (0x40 - 0x47)
+#define INA219a 0x41 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260a 0x41 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+#define STMPE610 0x41 // /STMPE810 Resistive Touch Controller (0x41 or 0x44)
+#define STMPE611 0x41 // /STMPE811 Resistive Touch Controller (0x41 or 0x44)
+
+// #define HDC1008 0x42 // Humidity/Temperature Sensor (0x40, 0x41, 0x42 or 0x43)
+// #define TMP007 0x42 // IR Temperature Sensor (0x40 - 0x47)
+// #define TMP006 0x42 // IR Temperature Sensor (0x40 - 0x47)
+#define INA219b 0x42 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+
+// #define HDC1008 0x43 // Humidity/Temperature Sensor (0x40, 0x41, 0x42 or 0x43)
+// #define TMP007 0x43 // IR Temperature Sensor (0x40 - 0x47)
+// #define TMP006 0x43 // IR Temperature Sensor (0x40 - 0x47)
+#define INA219c 0x43 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x43 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+
+#define SHT40 0x44 // Humidity/Temperature Sensor (0x44)
+#define SHT31 0x44 // Humidity/Temperature Sensor (0x44 or 0x45 selectable)
+// #define TMP007 0x44 // IR Temperature Sensor (0x40 - 0x47)
+// #define TMP006 0x44 // IR Temperature Sensor (0x40 - 0x47)
+#define ISL29125 0x44 // Color Sensor (0x44 only)
+#define INA219d 0x44 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x44 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+
+// #define SHT31 0x45 // Humidity/Temperature Sensor (0x44 or 0x45 selectable)
+// #define TMP007 0x45 // IR Temperature Sensor (0x40 - 0x47)
+// #define TMP006 0x45 // IR Temperature Sensor (0x40 - 0x47)
+// #define INA219e 0x45 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x45 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+
+#define TMP007a 0x46 // IR Temperature Sensor (0x40 - 0x47)
+#define TMP006a 0x46 // IR Temperature Sensor (0x40 - 0x47)
+#define INA219f 0x46 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260f 0x46 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+
+#define TMP007b 0x47 // IR Temperature Sensor (0x40 - 0x47)
+#define TMP006b 0x47 // IR Temperature Sensor (0x40 - 0x47)
+// #define INA219b 0x47 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260b 0x47 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+
+#define ADS1115 0x48 // 4-channel 16-Bit ADC (0x48 0x49 0x4A or 0x4B)
+#define ADT7410 0x48 // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define INA219g 0x48 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260g 0x48 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+#define PCF8591 0x48 // Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+// #define PCT2075 0x48 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define PN532 0x48 // NFC/RFID reader (0x48 only)
+#define TMP102 0x48 // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define TMP117 0x48 // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+
+#define ADS1115a 0x49 // 4-Channel 16-Bit ADC (0x48 0x49 0x4A or 0x4B)
+#define ADT7410a 0x49 // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define AS7262a 0x49 // Light/Color Sensor (0x49)
+#define INA219h 0x49 // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260h 0x49 // Precision DC Current/Power Sensor (0x40 - 0x4F)
+#define PCF8591a 0x49 // Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+#define PCT2075a 0x49 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TSL2561a 0x49 // Light Sensor (0x29, 0x39 or 0x49)
+#define TMP102a 0x49 // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define TMP117a 0x49 // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+
+#define ADS1115b 0x4A // 4-channel 16-Bit ADC (0x48 0x49 0x4A or 0x4B)
+#define ADT7410b 0x4A // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define BNO085b 0x4A // 9-DoF IMU (0x4A or 0x4B)
+#define INA219i 0x4A // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260i 0x4A // Precision DC Current/Power Sensor (0x40 - 0x4F)
+#define PCF8591b 0x4A // Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+#define PCT2075b 0x4A // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TMP102b 0x4A // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define TMP117b 0x4A // Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+
+#define ADS1115c 0x4B // 4-channel 16-Bit ADC (0x48 0x49 0x4A or 0x4B)
+#define ADT7410c 0x4B //  Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define BNO085c 0x4B //  9-DoF IMU (0x4A or 0x4B)
+// #define INA219c 0x4B //  High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+#define INA260c 0x4B //  Precision DC Current/Power Sensor (0x40 - 0x4F)
+#define PCF8591c 0x4B //  Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+#define PCT2075c 0x4B //  Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TMP102c 0x4B //  Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+#define TMP117c 0x4B //  Temperature Sensor (0x48 0x49 0x4A or 0x4B)
+
+#define EMC2101 0x4C // Fan Controller (0x4C)
+// #define INA219d 0x4C // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x4C // Precision DC Current/Power Sensor (0x40 - 0x4F)
+// #define PCF8591 0x4C // Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+// #define PCT2075 0x4C // Temperature Sensor (0x28-0x2E, 0x30-0x37, 0x48-0x4F)
+
+// #define INA219e 0x4D // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x4D // Precision DC Current/Power Sensor (0x40 - 0x4F)
+// #define PCF8591 0x4D //  Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+// #define PCT2075 0x4D // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// #define INA219 0x4E // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x4E // Precision DC Current/Power Sensor (0x40 - 0x4F)
+// #define PCF8591 0x4E // Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+// #define PCT2075 0x4E // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// #define INA219 0x4F // High-Side DC Current/Voltage Sensor (0x40 - 0x4F)
+// #define INA260 0x4F // Precision DC Current/Power Sensor (0x40 - 0x4F)
+// #define PCF8591 0x4F // Quad 8-Bit ADC + 8-Bit DAC (0x48 - 0x4F)
+// #define PCT2075 0x4F // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+
+// 24LCxx series EEPROMs of various sizes and makes
+#define 24LC32A 0x50 // 32Kbit (4K x 8) I2C Serial EEPROM (0x50 - 0x57)
+#define 24LCxx 0x50 // I2C Serial EEPROM (0x50 - 0x57)
+
+// #define PCA9685 0x50 // See "Special Cases"
+
+#define MB85RC 0x50 // FRAM (0x50 - 0x57)
+
+// #define MB85RC 0x51 // FRAM (0x50 - 0x57)
+
+// #define MB85RC 0x52 // FRAM (0x50 - 0x57)
+#define Nintendo 0x52 // Nunchuck Controller (0x52 only)
+
+// #define ADXL343 0x53 // 3-Axis Accelerometer (0x1D or 0x53)
+// #define ADXL345 0x53 // 3-Axis Accelerometer (0x1D or 0x53)
+#define LTR390 0x53 // UV Sensor (0x53)
+// #define MB85RC 0x53 // FRAM (0x50 - 0x57)
+
+// #define MB85RC 0x54 // FRAM (0x50 - 0x57)
+
+// #define MB85RC 0x55 // FRAM (0x50 - 0x57)
+
+// #define MB85RC 0x56 // FRAM (0x50 - 0x57)
+
+// #define MB85RC 0x57 // FRAM (0x50 - 0x57)
+#define MAX3010x 0x57 // Pulse & Oximetry Sensor (0x57)
+
+#define AW9523 0x58 // GPIO Expander and LED Driver (0x58 - 0x5B)
+#define TPA2016 0x58 // Class-D Audio Amplifier (0x58 only)
+#define SGP30 0x58 // Gas Sensor (0x58 only)
+
+// #define AW9523 0x59 // GPIO Expander and LED Driver (0x58 - 0x5B)
+#define SGP40 0x59 // Gas Sensor (0x59 only)
+
+// #define AW9523 0x5A // GPIO Expander and LED Driver (0x58 - 0x5B)
+#define MPR121 0x5A // 12-Point Capacitive Touch Sensor (0x5A, 0x5B, 0x5C, 0x5D)
+#define CCS811 0x5A // VOC Sensor (0x5A or 0x5B)
+#define MLX9061x 0x5A // IR Temperature Sensor (0x5A only)
+#define DRV2605 0x5A // Haptic Motor Driver (0x5A only)
+
+// #define AW9523 0x5B // GPIO Expander and LED Driver (0x58 - 0x5B)
+// #define MPR121 0x5B // 12-Point Capacitive Touch Sensor (0x5A, 0x5B, 0x5C, 0x5D)
+// #define CCS811 0x5B // VOC Sensor (0x5A or 0x5B)
+
+#define AM2315 0x5C // Humidity/Temp Sensor (0x5C only)
+#define AM2320 0x5C // Humidity/Temp Sensor (0x5C only)
+// #define BH1750 0x5C // Light Sensor (0x23 or 0x5C)
+#define LPS22 0x5C // Pressure Sensor (0x5C, 0x5D)
+#define LPS25 0x5C // Pressure Sensor (0x5C, 0x5D)
+#define LPS33HW 0x5C // Ported Pressure Sensor (0x5C, 0x5D)
+#define LPS35HW 0x5C // Pressure Sensor (0x5C, 0x5D)
+// #define MPR121 0x5C // 12-Point Capacitive Touch Sensor (0x5A, 0x5B, 0x5C, 0x5D)
+
+// #define LPS22 0x5D // Pressure Sensor (0x5C, 0x5D)
+//#define LPS25 0x5D // Pressure Sensor (0x5C, 0x5D)
+//#define LPS33HW 0x5D // Ported Pressure Sensor (0x5C, 0x5D)
+//#define LPS35HW 0x5D // Pressure Sensor (0x5C, 0x5D)
+//#define MPR121 0x5D // 12-Point Capacitive Touch Sensor (0x5A, 0x5B, 0x5C, 0x5D)
+
+#define TLV493D 0x5E // 3-Axis Magnetometer (0x5E)
+
+#define HTS221 0x5F // Humidity/Temperature Sensor (0x5F)
+
+//#define PCA9685 0x60 // . See "Special Cases"
+
+#define ATECC608 0x60 // Cryptographic Co-Processor (0x60)
+#define MCP4728 0x60 // Quad DAC (0x60 only)
+#define MCP9600 0x60 // Temperature Sensor (0x60 - 0x67)
+#define MPL115A2 0x60 // Barometric Pressure (0x60 only)
+#define MPL3115A2 0x60 // Barometric Pressure (0x60 only)
+#define Si5351A 0x60 // Clock Generator (0x60 or 0x61)
+#define Si1145 L0x60 // Light/IR Sensor (0x60 only)
+#define MCP4725A0 0x60 // 12-Bit DAC (0x60 or 0x61)
+#define TEA5767 0x60 // Radio Receiver (0x60 only)
+#define VCNL4040 0x60 // Proximity and Ambient Light Sensor (0x60 only)
+
+//#define MCP4725A0 0x61 // 12-Bit DAC (0x60 or 0x61)
+//#define MCP9600 T0x61 // emperature Sensor (0x60 - 0x67)
+//#define Si5351A 0x61 // Clock Generator (0x60 or 0x61)
+#define SCD30 0x61 // Humidity/Temperature/CO2 Sensor (0x61)
+
+#define MCP4725A1 0x62 // 12-Bit DAC (0x62 or 0x63)
+// #define MCP9600 0x62 // Temperature Sensor (0x60 - 0x67)
+
+// #define MCP4725A1 0x63 // 12-Bit DAC (0x62 or 0x63)
+// #define MCP9600 0x63 // Temperature Sensor (0x60 - 0x67)
+// #define Si4713 0x63 // FM Transmitter with RDS (0x11 or 0x63)
+
+#define MCP4725A2 0x64 // 12-Bit DAC (0x64 or 0x65)
+// #define MCP9600 0x64 // Temperature Sensor (0x60 - 0x67)
+
+// #define MCP4725A2 0x65 // 12-Bit DAC (0x64 or 0x65)
+// #define MCP9600 0x65 // Temperature Sensor (0x60 - 0x67)
+
+#define MCP4725A3 0x66 // 12-Bit DAC (0x66 or 0x67)
+// #define MCP9600 0x66 // Temperature Sensor (0x60 - 0x67)
+
+// #define MCP4725A3 0x67 // 12-Bit DAC (0x66 or 0x67)
+// #define MCP9600 0x67 // Temperature Sensor (0x60 - 0x67)
+
+// This address is really popular with real time clocks, almost all of them use 0x68!
+
+#define AMG8833 0x68 // IR Thermal Camera Breakout (0x68 or 0x69)
+#define DS1307 0x68 // RTC (0x68 only)
+#define DS3231 0x68 // RTC (0x68 only)
+#define ICM20649 0x68 // Accelerometer + Gyroscope (0x68 or 0x69)
+#define ITG3200 0x68 // Gyroscope (0x68 or 0x69)
+// #define MPU-9250 0x68 // 9-DoF IMU (0x68 or 0x69)
+// #define MPU-60X0 0x68 // Accelerometer + Gyroscope (0x68 or 0x69)
+#define PCF8523 0x68 // RTC (0x68 only)
+
+//#define AMG8833 0x69 // IR Thermal Camera Breakout (0x68 or 0x69)
+// #define ICM20649 0x69 // Accelerometer + Gyroscope (0x68 or 0x69)
+// #define MPU9250 0x69 // 9-DoF IMU (0x68 or 0x69)
+#define MPU60X0 0x69 // Accelerometer + Gyroscope (0x68 or 0x69)
+// #define ITG3200 0x69 // Gyroscope (0x68 or 0x69)
+
+#define ICM330DHC 0x6A // 6-Axis IMU (0x6A or 0x6B)
+#define L3GD20H 0x6A // Gyroscope (0x6A or 0x6B)
+#define LSM6DS33 0x6A // 6-Axis IMU (0x6A or 0x6B)
+#define LSM6DSOX 0x6A // 6-Axis IMU (0x6A or 0x6B)
+// #define LSM9DS0 0x6A // 9-Axis IMU (0x1D or 0x1E for Accel/Mag, 0x6A or 0x6B for Gyro)
+
+// #define ICM330DHC 0x6B // 6-Axis IMU (0x6A or 0x6B)
+// #define L3GD20H 0x6B // Gyroscope (0x6A or 0x6B)
+// #define LSM6DS33 0x6B // 6-Axis IMU (0x6A or 0x6B)
+// #define LSM6DSOX 0x6B // 6-Axis IMU (0x6A or 0x6B)
+// #define LSM9DS0 0x6B // 9-Axis IMU (0x1D or 0x1E for Accel/Mag, 0x6A or 0x6B for Gyro)
+
+// PCA9685 Shields, HATs, Breakouts, Wings etc - See "Special Cases"
+
+#define HT16K33 0x70 // LED Matrix Driver (0x70 - 0x77)
+// #define PCT2075 0x70 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548 0x70 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+#define SHTC3 0x70 // Temp and Humidity Sensor (0x70)
+
+#define HT16K33a 0x71 // LED Matrix Driver (0x70 - 0x77)
+// #define PCT2075a 0x71 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548a 0x71 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+#define HT16K33b 0x72 // LED Matrix Driver (0x70 - 0x77)
+// #define PCT2075b 0x72 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548b 0x72 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+#define HT16K33c 0x73 // LED Matrix Driver (0x70 - 0x77)
+// #define PCT2075c 0x73 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548c 0x73 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+#define HT16K33d 0x74 // LED Matrix Driver (0x70 - 0x77)
+#define IS31FL3731 0x74 // 144-LED CharliePlex driver (0x74 0x75 0x66 or 0x77)
+#define PCT2075d 0x74 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548d 0x74 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+#define HT16K33e 0x75 // LED Matrix Driver (0x70 - 0x77)
+#define IS31FL3731b 0x75 // 144-LED CharliePlex driver (0x74 0x75 0x66 or 0x77)
+#define PCT2075e 0x75 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548e 0x75 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+#define BME280 0x76 // Temp/Barometric/Humidity (0x76 or 0x77)
+#define BME680 0x76 // Temp/Barometric/Humidity/Gas (0x76 or 0x77)
+#define BMP280 0x76 // Temp/Barometric (0x76 or 0x77)
+#define BMP388 0x76 // Temp/Barometric (0x76 or 0x77)
+#define BMP390 0x76 // Temp/Barometric (0x76 or 0x77)
+#define DPS310 0x76 // Barometric Sensor (0x76 or 0x77)
+// #define HT16K33 0x76 // LED Matrix Driver (0x70 - 0x77)
+#define IS31FL3731c 0x76 // 144-LED CharliePlex driver (0x74 0x75 0x66 or 0x77)
+#define MS5607 0x76 // /MS5611 Barometric Pressure (0x76 or 0x77)
+// #define MS8607 0x76 // Temp/Barometric/Humidity (0x40 for Humidity and 0x76 for Barometric/Temperature)
+#define PCT2075f 0x76 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548f 0x76 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+#define BMA180 0x77 // Accelerometer (0x77 only)
+// #define BME280 0x77 // Temp/Barometric/Humidity (0x76 or 0x77)
+// #define BME680 0x77 // Temp/Barometric/Humidity/Gas (0x76 or 0x77)
+#define BMP180 0x77 // Temp/Barometric (0x77 only)
+#define BMP085 0x77 // Temp/Barometric (0x77 only)
+// #define BMP280 0x77 // Temp/Barometric (0x76 or 0x77)
+// #define BMP388 0x77 // Temp/Barometric (0x76 or 0x77)
+// #define BMP390 0x77 // Temp/Barometric (0x76 or 0x77)
+#define DPS310a 0x77 // Barometric Sensor (0x76 or 0x77)
+// #define HT16K33a 0x77 // LED Matrix Driver (0x70 - 0x77)
+#define IS31FL3731d 0x77 // 144-LED CharliePlex driver (0x74 0x75 0x66 or 0x77)
+#define MS5607b 0x77 // /MS5611 Barometric Pressure (0x76 or 0x77)
+#define PCT2075g 0x77 // Temperature Sensor (0x28-0x2E, 0x48-0x4F, 0x70-0x77)
+#define TCA9548g 0x77 // 1-to-8 I2C Multiplexer (0x70 - 0x77)
+
+
+#endif /* INC_I2CADDRESSES_H_ */
