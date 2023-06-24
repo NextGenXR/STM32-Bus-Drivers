@@ -16,5 +16,5 @@ Portions of this code are based on Adafruit libraries and sample code from ST Mi
 See also the LICENSE file for STM software and Adafruit and STM header file notifications.
 
 Jenni O'Connor
-NextGen XR, Inc. (retired)
-Microtronics Intelligent Products
+* NextGen XR, Inc. (retired)
+* Microtronics Intelligent Products
