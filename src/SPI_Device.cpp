@@ -7,12 +7,12 @@
 
 #include "SPI_Device.h"
 
-SPI_API::SPI_API() {
+SPI_Device::SPI_Device() {
 	// TODO Auto-generated constructor stub
 
 }
 
-SPI_API::~SPI_API() {
+SPI_Device::~SPI_Device() {
 	// TODO Auto-generated destructor stub
 }
 
