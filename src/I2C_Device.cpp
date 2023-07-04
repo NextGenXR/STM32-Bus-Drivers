@@ -8,7 +8,7 @@
 
 #include <stm32yyxx_hal_def.h>
 #include <stm32yyxx_hal_i2c.h>
-#include <stm32f7xx_hal_i2c_ex.h>
+#include <stm32yyxx_hal_i2c_ex.h>
 #include <stm32yyxx_hal_rcc.h>
 #include <I2C_API_def.h>
 #include <I2C_Device.h>
