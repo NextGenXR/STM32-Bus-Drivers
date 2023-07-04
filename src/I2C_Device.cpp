@@ -8,7 +8,7 @@
 
 #include <stm32yyxx_hal_def.h>
 #include <stm32yyxx_hal_i2c.h>
-#include <stm32f7xx_hal_i2c_ex.h>
+#include <stm32yyxx_hal_i2c_ex.h>
 #include <stm32yyxx_hal_rcc.h>
 #include <I2C_API_def.h>
 #include <I2C_Device.h>
@@ -120,7 +120,8 @@ void I2C_Device::I2C_Init(I2C_HandleTypeDef* hi2c, I2C_TypeDef* i2cx, I2C_InitTy
 
 /* Return the address for this device, right-shifted from stored value. */
 I2C_AddressTypeDef I2C_Device::address() {
-	if(addr == 0)
+
+	if(_i2c_device.Address != 0)
 		return (_i2c_device.Address>>1);
 
 	return (0);
