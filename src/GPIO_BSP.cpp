@@ -11,6 +11,19 @@
 #include "GPIO_BSP.h"
 #include <IO_Typedefs.h>
 
+#include <Analog_IO.h>
+#include <Digital_IO.h>
+
+Analog_IO* aio;
+Digital_IO* dio;
+
+void begin()
+{
+	aio = Analog_IO::getInstance();
+	dio = Digital_IO::getInstance();
+
+
+}
 
 
 bool digitalRead(uint8_t pin) {
