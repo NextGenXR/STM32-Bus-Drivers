@@ -48,6 +48,6 @@ private:
 
 };
 
-Digital_IO* Digital_IO::instance = nullptr;  // Initialize the instance to nullptr
+
 
 #endif /* DRIVERS_BSP_STM32_BUS_DRIVERS_DIGITAL_IO_H_ */

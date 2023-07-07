@@ -15,7 +15,7 @@
 #include "Digital_IO.h"
 
 
-
+Digital_IO* Digital_IO::instance = nullptr;  // Initialize the instance to nullptr
 
 void Digital_IO::_pinMode(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin,
 		uint32_t Pin, uint32_t Mode, uint32_t Pull, uint32_t Speed) {

@@ -12,15 +12,15 @@
 #include <stdbool.h>
 
 class Analog_IO {
-            // Private constructor to prevent instantiation
 
 public:
-  static Analog_IO* getInstance() {
-    if (instance == nullptr) {
-      instance = new Analog_IO();
-    }
-    return instance;
-  }
+
+	static Analog_IO* getInstance() {
+		if (instance == nullptr) {
+			instance = new Analog_IO();
+		}
+	return instance;
+	}
 
 
   void analogReference();
@@ -33,12 +33,13 @@ public:
   bool d2aWrite(uint8_t pin, uint16_t value);
 
 private:
-  static Analog_IO* instance;  // The single instance of the class
+	static Analog_IO* instance;  // The single instance of the class
+  // Private constructor to prevent instantiation
   Analog_IO() {}
 
 };
 
-Analog_IO* Analog_IO::instance = nullptr;  // Initialize the instance to nullptr
+
 
 
 #endif /* DRIVERS_BSP_STM32_BUS_DRIVERS_ANALOG_IO_H_ */
