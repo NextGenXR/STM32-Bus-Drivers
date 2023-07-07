@@ -19,13 +19,14 @@
 #define LOW 0
 #endif
 
-enum PIN_MODE {
+typedef enum PIN_MODE {
 	INPUT,
 	OUTPUT,
 	INPUT_PULLUP,
 	ANALOG_IN,
-	ANALOG_OUT
-};
+	ANALOG_OUT,
+	NONE
+} PinMode_TypeDef;
 
 
 
