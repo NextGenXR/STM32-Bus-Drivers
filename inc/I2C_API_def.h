@@ -17,13 +17,27 @@ typedef uint16_t I2C_AddressTypeDef;
 typedef uint8_t* BufferTypeDef;
 typedef uint16_t LengthTypeDef;
 
+
+enum I2C_Controllers {
+	I2C_1,
+	I2C_2,
+	I2C_3,
+	I2C_4,
+	I2C_5
+};
+
+typedef I2C_Controllers I2C_ControllerTypeDef;
+
 typedef struct
 {
+	I2C_ControllerTypeDef Controller;
 	I2C_AddressTypeDef Address;
 	I2C_HandleTypeDef *Handle;
 	I2C_TypeDef *Type;
 	bool Master = true;
 } I2C_DeviceTypeDef;
+
+
 
 /* Defaults */
 #define I2C_TIMING        0x00D00E28  /* (Rise time = 120ns, Fall time = 25ns) */
