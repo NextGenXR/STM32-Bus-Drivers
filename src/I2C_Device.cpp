@@ -5,6 +5,9 @@
  *      Author: joconnor
  */
 
+#include <cstdio>
+#include <cstdint>
+#include <cstdbool>
 
 #include <stm32yyxx_hal_def.h>
 #include <stm32yyxx_hal_i2c.h>
@@ -19,6 +22,7 @@ extern "C" {
 #endif
 
 /* Potential STM32 I2C Devices. Not all handles may exist */
+
 	extern I2C_HandleTypeDef hi2c1;
 	extern I2C_HandleTypeDef hi2c2;
 	extern I2C_HandleTypeDef hi2c3;
@@ -33,7 +37,7 @@ constexpr unsigned long int I2C_TIMEOUT = 1000;
 constexpr unsigned long int I2C_TRIALS = 5;
 #define ADDR_BUFFER_SZ 32
 
-HAL_StatusTypeDef I2c_status = HAL_ERROR;
+HAL_StatusTypeDef I2C_status = HAL_ERROR;
 
 /**
   * @brief Variables related to Master process
@@ -60,7 +64,7 @@ __IO uint8_t ubMasterReceiveIndex      = 0;
   * @brief Variables related to Slave process
   */
 const char* aSlaveInfo[]      = {
-                  "STM32F767xx",
+                  "STM32yyxx",
                   "1.2.3"};
 
 uint8_t       aSlaveReceiveBuffer[BUFFER_SIZE]  = {0};
@@ -74,49 +78,16 @@ __IO uint32_t uwTransferEnded           = 0;
 
 
 I2C_Device::I2C_Device() {
-	// TODO Auto-generated constructor stub
-
 	aTxBuffer = new uint8_t[TXBUFFERSIZE];
 	aRxBuffer = new uint8_t[RXBUFFERSIZE];
 }
 
 I2C_Device::~I2C_Device() {
-	// TODO Auto-generated destructor stub
 	delete[] aTxBuffer;
 	delete[] aRxBuffer;
 }
 
 
-/*
- * @brief Initialize I2C peripheral in the STM32 chip
- * Pass in a HandleTypeDef pointe to store I2C states
- * */
-void I2C_Device::I2C_Init(I2C_HandleTypeDef* hi2c, I2C_TypeDef* i2cx, I2C_InitTypeDef* init)
-{
-
-	/* Copy input params to handle's Init params */
-	hi2c->Instance             = i2cx; // Your I2C peripheral instance
-	hi2c->Init.AddressingMode  = init->AddressingMode;
-	hi2c->Init.Timing			= init->Timing;
-
-	hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-	// TODO: Missing Param
-	// hi2c->Init.DutyCycle       = I2C_DUTYCYCLE_2;
-
-	hi2c->Init.GeneralCallMode = init->GeneralCallMode; 	// I2C_GENERALCALL_DISABLE;
-	hi2c->Init.NoStretchMode   = init->NoStretchMode;		// I2C_NOSTRETCH_DISABLE;
-	hi2c->Init.OwnAddress1     = init->OwnAddress1;
-	hi2c->Init.OwnAddress2     = init->OwnAddress2;
-	hi2c->Init.OwnAddress2Masks = init->OwnAddress2Masks;
-
-	HAL_I2C_Init(hi2c);
-
-	/* Enable the Analog I2C Filter */
-	HAL_I2CEx_ConfigAnalogFilter(hi2c,I2C_ANALOGFILTER_ENABLE);
-
-	/* Additional Configuration */
-	hi2c->Mode = HAL_I2C_ModeTypeDef::HAL_I2C_MODE_MASTER;
-}
 
 /* Return the address for this device, right-shifted from stored value. */
 I2C_AddressTypeDef I2C_Device::address() {
@@ -244,49 +215,6 @@ void I2C_Device::wait_transfer(uint32_t timeout) {
 	  }
 }
 
-// Function to get I2C clock frequency
-uint32_t I2C_Device::GetI2CClockFreq(void) {
-	RCC_PeriphCLKInitTypeDef PeriphClkInit;
-	RCC_OscInitTypeDef RCC_OscInitStruct;
-
-	// Get the current peripheral clock configuration
-	HAL_RCCEx_GetPeriphCLKConfig(&PeriphClkInit);
-
-	if (PeriphClkInit.PeriphClockSelection == RCC_PERIPHCLK_I2Cx) {
-		// I2C clock source is based on PLL
-		uint32_t pllSource;
-		uint32_t pllM;
-		uint32_t pllN;
-		uint32_t pllR;
-		uint32_t pllP;
-		uint32_t systemClock;
-
-		// Get PLL settings
-		HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
-		pllSource = RCC_OscInitStruct.PLL.PLLSource;
-		pllM = RCC_OscInitStruct.PLL.PLLM;
-		pllN = RCC_OscInitStruct.PLL.PLLN;
-		pllR = RCC_OscInitStruct.PLL.PLLR;
-		pllP = RCC_OscInitStruct.PLL.PLLP;
-
-		// Get system clock
-		if (pllSource == RCC_PLLSOURCE_HSI) {
-		  systemClock = HSI_VALUE;
-		} else
-			if (pllSource == RCC_PLLSOURCE_HSE) {
-		  systemClock = HSE_VALUE;
-		} else {
-		  // Other PLL sources (e.g., PLL source from HSI48)
-		  // TODO: Adjust accordingly or add additional cases if needed
-		  return (0);
-		}
-
-		// Calculate the I2C clock frequency
-		return ((systemClock * pllN) / (pllM * pllP * pllR));
-	}
-
-  return (0);
-}
 
 
 HAL_StatusTypeDef I2C_Device::transmit_hal_i2c(BufferTypeDef pData, LengthTypeDef Size)
@@ -310,36 +238,34 @@ HAL_StatusTypeDef I2C_Device::receive_hal_i2c(BufferTypeDef pData, LengthTypeDef
 		return (HAL_I2C_Slave_Receive(_i2c_device.Handle, pData, Size, I2C_TIMEOUT));
 }
 
-/*
- * Initialize the I2C Interface if necessary
- *
- *
- * */
-HAL_StatusTypeDef I2C_Device::init_i2c(I2C_HandleTypeDef* I2cHandle) //, I2C_TypeDef* _I2Cx )
+
+/* Check I2C Address on this I2C Device */
+bool I2C_Device::check_address(uint8_t address)
 {
-	HAL_StatusTypeDef result = HAL_OK;
+	bool state = false;
 
-	if(HAL_I2C_IsDeviceReady(_i2c_device.Handle, _i2c_device.Address, I2C_TRIALS, I2C_TIMEOUT) == HAL_OK)
-		return (result);
+	if(_i2c_device.Handle == nullptr)
+		return false;
 
-	// TODO: This overrides the settings from the CubeMX
-	/*##-1- Configure the I2C peripheral ######################################*/
-	I2cHandle->Instance             = I2Cx;
-	I2cHandle->Init.Timing          = I2C_TIMING;
-	I2cHandle->Init.OwnAddress1     = I2C_ADDRESS;
-	I2cHandle->Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
-	I2cHandle->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-	I2cHandle->Init.OwnAddress2     = I2C_OWN_ADDRESS;
-	I2cHandle->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-	I2cHandle->Init.NoStretchMode   = I2C_NOSTRETCH_DISABLE;
+	// Send a start condition on the I2C bus
+	HAL_I2C_Master_Transmit(_i2c_device.Handle, 0, 0, 0, I2C_TIMEOUT);
 
-	result = HAL_I2C_Init(I2cHandle);
-	if(result != HAL_OK) {
-	/* Initialization Error */
-	Error_Handler();
+	// Iterate through all possible I2C device addresses
+	for (uint8_t address = 0; address < 128; address++)
+	{
+		// Try to communicate with the device at the current address
+		if (HAL_I2C_IsDeviceReady(_i2c_device.Handle, address, 1, 100) == HAL_OK)
+		{
+			// Device is present on the I2C bus
+			printf("Device found at address 0x%02X\n", address);
+			state = true;
+		}
 	}
 
-	return (result);
+	// Send a stop condition on the I2C bus
+	HAL_I2C_Master_Transmit(_i2c_device.Handle, 0, 0, 0, I2C_TIMEOUT);
+
+	return state;
 }
 
 
