@@ -3,91 +3,106 @@
  *
  *  Created on: Jul 6, 2023
  *      Author: joconnor
+ *
+ *  An I2C_Instance is a class to initialize an I2C peripheral.
+ *  This code mimics the functionality found in main.c or i2c.c from CubeMX.
+ *  The I2C_Init will configure the I2C controller and GPIO port pins.
+ *
+ *
  */
 
+
+
+#include <cstdio>
+#include <cstdint>
+#include <cstdbool>
+
+#include <stm32yyxx_hal_def.h>
+#include <stm32yyxx_hal_i2c.h>
+#include <stm32yyxx_hal_i2c_ex.h>
+#include <stm32yyxx_hal_rcc.h>
+#include <I2C_API_def.h>
+#include <I2C_Device.h>
+#include <tx_api.h>
+
+#include "I2C_API_def.h"
 #include "I2C_Instance.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /* Potential STM32 I2C Devices. Not all handles may exist */
 
 	extern I2C_HandleTypeDef hi2c1;
-	extern I2C_HandleTypeDef hi2c2;
-	extern I2C_HandleTypeDef hi2c3;
-	extern I2C_HandleTypeDef hi2c4;
-	extern I2C_HandleTypeDef hi2c5;
-#ifdef __cplusplus
-}
-#endif
+	I2C_HandleTypeDef hi2c2;
+	I2C_HandleTypeDef hi2c3;
+	I2C_HandleTypeDef hi2c4;
+	I2C_HandleTypeDef hi2c5;
 
 
-I2C_Instance::I2C_Instance() {
-	// TODO Auto-generated constructor stub
-
-}
-
-I2C_Instance::~I2C_Instance() {
-	// TODO Auto-generated destructor stub
-}
+I2C_TypeDef* _instance;
+I2C_HandletypeDef _hi2c = nullptr;
 
 
 /*
+ * @brief Initialize I2C peripheral in the STM32 chip
  * Takes the I2C_TypeDef of the controller to use macro: I2C1, I2C2, etc.
+ * Pass in a HandleTypeDef pointer to store I2C states
+ * I2C_TypeDef is one of I2C1, I2C2, etc.
+ * */
+
+/*
+ *
  *
  *
  * */
-HAL_StatusTypeDef I2C_Instance::I2C_Init(I2C_ControllerTypeDef controller, I2C_InitTypeDef* init) {
+HAL_StatusTypeDef I2C_Init(I2C_ControllerTypeDef controller, I2C_InitTypeDef* init) {
 
 	// TODO: Verify that this MCU has that controller available
 	// TODO: User
 
 	HAL_StatusTypeDef retval = HAL_ERROR;
 
-	_i2c_device.Controller = controller;
-
 	switch(controller) {
 	case I2C_1:
-		_i2c_device.Handle = &hi2c1;			// Global Handle
-		_i2c_device.Handle->Instance = I2C1; 	// Your I2C peripheral instance
+		_hi2c = &hi2c1;			// Global Handle
+		_hi2c->Instance = I2C1; 	// Your I2C peripheral instance
 		break;
 	case I2C_2:
-		_i2c_device.Handle = &hi2c2;			// Global Handle
-		_i2c_device.Handle->Instance = I2C2; 	// Your I2C peripheral instance
+		_hi2c = &hi2c2;			// Global Handle
+		_hi2c->Instance = I2C2; 	// Your I2C peripheral instance
 		break;
 	case I2C_3:
-		_i2c_device.Handle = &hi2c3;			// Global Handle
-		_i2c_device.Handle->Instance = I2C3; 	// Your I2C peripheral instance
+		_hi2c = &hi2c3;			// Global Handle
+		_hi2c->Instance = I2C3; 	// Your I2C peripheral instance
 		break;
 	case I2C_4:
-		_i2c_device.Handle = &hi2c4;			// Global Handle
-		_i2c_device.Handle->Instance = I2C4; 	// Your I2C peripheral instance
+		_hi2c = &hi2c4;			// Global Handle
+		_hi2c->Instance = I2C4; 	// Your I2C peripheral instance
 		break;
 	case I2C_5:
-		_i2c_device.Handle = &hi2c5;			// Global Handle
-		_i2c_device.Handle->Instance = I2C5; 	// Your I2C peripheral instance
+		_hi2c = &hi2c5;			// Global Handle
+		_hi2c->Instance = I2C5; 	// Your I2C peripheral instance
 		break;
 	default:
 		break;
 	}
 
 	// No CASE triggered, or no controller for that I2C
-	if(_i2c_device.Handle == nullptr) {
+	if(_hi2c == nullptr) {
 		// TODO: If port exists, perhaps init with new params?
 		return retval;
 	}
 
-	/* Copy input params to handle's Init params */
-	_i2c_device.Handle->Init.AddressingMode  = init->AddressingMode;
-	_i2c_device.Handle->Init.Timing			= init->Timing;
 
-	_i2c_device.Handle->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-	_i2c_device.Handle->Init.GeneralCallMode = init->GeneralCallMode; 	// I2C_GENERALCALL_DISABLE;
-	_i2c_device.Handle->Init.NoStretchMode   = init->NoStretchMode;		// I2C_NOSTRETCH_DISABLE;
-	_i2c_device.Handle->Init.OwnAddress1     = init->OwnAddress1;
-	_i2c_device.Handle->Init.OwnAddress2     = init->OwnAddress2;
-	_i2c_device.Handle->Init.OwnAddress2Masks = init->OwnAddress2Masks;
+	/* Copy input params to handle's Init params */
+	_hi2c->Init.AddressingMode  = init->AddressingMode;
+	_hi2c->Init.Timing			= init->Timing;
+
+	_hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+	_hi2c->Init.GeneralCallMode = init->GeneralCallMode; 	// I2C_GENERALCALL_DISABLE;
+	_hi2c->Init.NoStretchMode   = init->NoStretchMode;		// I2C_NOSTRETCH_DISABLE;
+	_hi2c->Init.OwnAddress1     = init->OwnAddress1;
+	_hi2c->Init.OwnAddress2     = init->OwnAddress2;
+	_hi2c->Init.OwnAddress2Masks = init->OwnAddress2Masks;
 
 	if (retval = HAL_I2C_Init(&hi2c1) != HAL_OK)
 	{
@@ -97,7 +112,7 @@ HAL_StatusTypeDef I2C_Instance::I2C_Init(I2C_ControllerTypeDef controller, I2C_I
 
 	/** Configure Analog filter
 	*/
-	if (retval = HAL_I2CEx_ConfigAnalogFilter(_i2c_device.Handle, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+	if (retval = HAL_I2CEx_ConfigAnalogFilter(_hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
 	{
 	  return retval;
 	  // Error_Handler();
@@ -105,75 +120,38 @@ HAL_StatusTypeDef I2C_Instance::I2C_Init(I2C_ControllerTypeDef controller, I2C_I
 
 	/** Configure Digital filter
 	*/
-	if (retval = HAL_I2CEx_ConfigDigitalFilter(_i2c_device.Handle, 0) != HAL_OK)
+	if (retval = HAL_I2CEx_ConfigDigitalFilter(_hi2c, 0) != HAL_OK)
 	{
 	  return retval;
 	  // Error_Handler();
 	}
 
 	/* Additional Configuration */
-	_i2c_device.Handle->Mode = HAL_I2C_ModeTypeDef::HAL_I2C_MODE_MASTER;
+	_hi2c->Mode = HAL_I2C_ModeTypeDef::HAL_I2C_MODE_MASTER;
 
 	return retval;
 }
 
 
-/*
- * @brief Initialize I2C peripheral in the STM32 chip
- * Pass in a HandleTypeDef pointer to store I2C states
- * I2C_TypeDef is one of I2C1, I2C2, etc.
- * */
-void I2C_Instance::I2C_Init(I2C_HandleTypeDef* hi2c, I2C_TypeDef* i2cx, I2C_InitTypeDef* init)
+
+
+
+
+void I2C_MspInit(I2C_TypeDef* instance)
 {
-	// Has this port been initialized?
-	if(_i2c_device.Handle != nullptr) return;
-
-	// I2C_DeviceTypeDef == internal structure
-
-	_i2c_device.Handle = hi2c;
-
-	/* Copy input params to handle's Init params */
-	_i2c_device.Handle->Instance             = i2cx; // Your I2C peripheral instance
-	_i2c_device.Handle->Init.AddressingMode  = init->AddressingMode;
-	_i2c_device.Handle->Init.Timing			= init->Timing;
-
-	_i2c_device.Handle->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-	// TODO: Missing Param
-	// hi2c->Init.DutyCycle       = I2C_DUTYCYCLE_2;
-
-	_i2c_device.Handle->Init.GeneralCallMode = init->GeneralCallMode; 	// I2C_GENERALCALL_DISABLE;
-	_i2c_device.Handle->Init.NoStretchMode   = init->NoStretchMode;		// I2C_NOSTRETCH_DISABLE;
-	_i2c_device.Handle->Init.OwnAddress1     = init->OwnAddress1;
-	_i2c_device.Handle->Init.OwnAddress2     = init->OwnAddress2;
-	_i2c_device.Handle->Init.OwnAddress2Masks = init->OwnAddress2Masks;
-
-	HAL_I2C_Init(_i2c_device.Handle);
-
-	/* Enable the Analog I2C Filter */
-	HAL_I2CEx_ConfigAnalogFilter(_i2c_device.Handle, I2C_ANALOGFILTER_ENABLE);
-
-	/* Additional Configuration */
-	_i2c_device.Handle->Mode = HAL_I2C_ModeTypeDef::HAL_I2C_MODE_MASTER;
-}
+	// TODO: Change the code to point to this processor's pins and ports
 
 
-
-void I2C_Instance::I2C_MspInit(I2C_TypeDef* instance)
-{
-	// TODO: Conditionals to process each of
-
-
-	_i2c_device.Handle->Instance = instance;
+	_hi2c->Instance = instance;
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  if(_i2c_device.Handle->Instance==I2C1)
+  /**
+   * I2C1
+   */
+  if(_hi2c->Instance==I2C1)
   {
-  /* USER CODE BEGIN I2C1_MspInit 0 */
-
-  /* USER CODE END I2C1_MspInit 0 */
-
   /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
@@ -203,15 +181,165 @@ void I2C_Instance::I2C_MspInit(I2C_TypeDef* instance)
     HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
     HAL_NVIC_SetPriority(I2C1_ER_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
-  /* USER CODE BEGIN I2C1_MspInit 1 */
-
-  /* USER CODE END I2C1_MspInit 1 */
   }
 
+#if defined(I2C2)
+  /**
+   * I2C2
+   */
+  if(_hi2c->Instance==I2C2)
+  {
+  /** Initializes the peripherals clock
+   * TODO: Change for I2C2
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C2;
+    PeriphClkInit.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+    /**I2C1 GPIO Configuration
+    PG13     ------> I2C1_SDA
+    PG14     ------> I2C1_SCL
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
+    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+    /* I2C1 clock enable */
+    __HAL_RCC_I2C2_CLK_ENABLE();
+
+    /* I2C1 interrupt Init */
+    HAL_NVIC_SetPriority(I2C2_EV_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C2_EV_IRQn);
+    HAL_NVIC_SetPriority(I2C2_ER_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C2_ER_IRQn);
+  }
+#endif
+
+#if defined(I2C3)
+  /**
+   * I2C3
+   */
+  if(_hi2c->Instance==I2C3)
+  {
+  /** Initializes the peripherals clock
+   * TODO: Configure for I2C3
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C3;
+    PeriphClkInit.I2c3ClockSelection = RCC_I2C3CLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+    /**I2C1 GPIO Configuration
+    PG13     ------> I2C1_SDA
+    PG14     ------> I2C1_SCL
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+    /* I2C1 clock enable */
+    __HAL_RCC_I2C3_CLK_ENABLE();
+
+    /* I2C1 interrupt Init */
+    HAL_NVIC_SetPriority(I2C3_EV_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C3_EV_IRQn);
+    HAL_NVIC_SetPriority(I2C3_ER_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C3_ER_IRQn);
+  }
+#endif
+
+#if defined(I2C4)
+  /**
+   * I2C4
+   */
+  if(_hi2c->Instance==I2C4)
+  {
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
+    PeriphClkInit.I2c4ClockSelection = RCC_I2C4CLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+    /**I2C1 GPIO Configuration
+    PG13     ------> I2C1_SDA
+    PG14     ------> I2C1_SCL
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C4;
+    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+    /* I2C1 clock enable */
+    __HAL_RCC_I2C4_CLK_ENABLE();
+
+    /* I2C1 interrupt Init */
+    HAL_NVIC_SetPriority(I2C4_EV_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C4_EV_IRQn);
+    HAL_NVIC_SetPriority(I2C4_ER_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C4_ER_IRQn);
+  }
+#endif
+
+#if defined(I2C5)
+  /**
+   * I2C5
+   */
+  if(_hi2c->Instance==I2C5)
+  {
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C5;
+    PeriphClkInit.I2c5ClockSelection = RCC_I2C5CLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+    /**I2C1 GPIO Configuration
+    PG13     ------> I2C1_SDA
+    PG14     ------> I2C1_SCL
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+    /* I2C1 clock enable */
+    __HAL_RCC_I2C5_CLK_ENABLE();
+
+    /* I2C1 interrupt Init */
+    HAL_NVIC_SetPriority(I2C5_EV_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C5_EV_IRQn);
+    HAL_NVIC_SetPriority(I2C5_ER_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(I2C5_ER_IRQn);
+  }
+#endif
 
 }
 
-void I2C_Instance::I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
+void I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 {
 
   if(i2cHandle->Instance==I2C1)
@@ -241,7 +369,7 @@ void I2C_Instance::I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 
 
 // Function to get I2C clock frequency
-uint32_t I2C_Instance::GetI2CClockFreq(void) {
+uint32_t GetI2CClockFreq(void) {
 	RCC_PeriphCLKInitTypeDef PeriphClkInit;
 	RCC_OscInitTypeDef RCC_OscInitStruct;
 
@@ -286,14 +414,15 @@ uint32_t I2C_Instance::GetI2CClockFreq(void) {
 
 /*
  * Initialize the I2C Interface if necessary
- *
+ * Sample code
  *
  * */
-HAL_StatusTypeDef I2C_Instance::init_i2c(I2C_HandleTypeDef* I2cHandle) //, I2C_TypeDef* _I2Cx )
+HAL_StatusTypeDef init_i2c(I2C_HandleTypeDef* I2cHandle) //, I2C_TypeDef* _I2Cx )
 {
 	HAL_StatusTypeDef result = HAL_OK;
 
-	if(HAL_I2C_IsDeviceReady(_i2c_device.Handle, _i2c_device.Address, I2C_TRIALS, I2C_TIMEOUT) == HAL_OK)
+	// If the Instance is Ready, don't Init
+	if(HAL_I2C_IsDeviceReady(_hi2c, _i2c_device.Address, I2C_TRIALS, I2C_TIMEOUT) == HAL_OK)
 		return (result);
 
 	// TODO: This overrides the settings from the CubeMX

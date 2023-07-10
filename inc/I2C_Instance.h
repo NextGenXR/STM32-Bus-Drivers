@@ -8,18 +8,23 @@
 #ifndef DRIVERS_BSP_STM32_BUS_DRIVERS_I2C_INSTANCE_H_
 #define DRIVERS_BSP_STM32_BUS_DRIVERS_I2C_INSTANCE_H_
 
-class I2C_Instance {
-public:
-	I2C_Instance(I2C_TypeDef* instance);
-	virtual ~I2C_Instance();
+/**
+ * This class takes the I2C1, I2C2, etc, instance macro and initializes the peripheral
+ */
+
+
+void I2C_Init(I2C_HandleTypeDef* hi2c, I2C_InitTypeDef* init);
+void I2C_Init(I2C_TypeDef* instance, I2C_InitTypeDef* init);
+
+
 
 	HAL_StatusTypeDef init_i2c(I2C_HandleTypeDef* I2cHandle);
+
+	void SetI2CTiming(uint32_t desiredSpeed);
 	uint32_t GetI2CClockFreq(void);
 
-
-
-private:
-	I2C_TypeDef* _instance;
+	void I2C_MspInit(I2C_HandleTypeDef* i2cHandle);
+	void I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle);
 
 };
 
