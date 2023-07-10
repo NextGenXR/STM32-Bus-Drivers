@@ -31,15 +31,23 @@
 
 /* Potential STM32 I2C Devices. Not all handles may exist */
 
-	extern I2C_HandleTypeDef hi2c1;
-	I2C_HandleTypeDef hi2c2;
-	I2C_HandleTypeDef hi2c3;
-	I2C_HandleTypeDef hi2c4;
-	I2C_HandleTypeDef hi2c5;
-
+extern I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c2;
+I2C_HandleTypeDef hi2c3;
+I2C_HandleTypeDef hi2c4;
+I2C_HandleTypeDef hi2c5;
 
 I2C_TypeDef* _instance;
-I2C_HandletypeDef _hi2c = nullptr;
+
+
+void init_I2C_Instance() {
+	// TODO Auto-generated constructor stub
+
+}
+
+void deinit_I2C_Instance() {
+	// TODO Auto-generated destructor stub
+}
 
 
 /*
@@ -133,16 +141,23 @@ HAL_StatusTypeDef I2C_Init(I2C_ControllerTypeDef controller, I2C_InitTypeDef* in
 }
 
 
-
+/*
+ * @brief Initialize I2C peripheral in the STM32 chip
+ * Pass in a HandleTypeDef pointer to store I2C states
+ * I2C_TypeDef is one of I2C1, I2C2, etc.
+ * */
+void I2C_Init(I2C_HandleTypeDef* hi2c, I2C_TypeDef* i2cx, I2C_InitTypeDef* init)
+{
+	// TODO: Change the code to point to this processor's pins and ports
 
 
 
 void I2C_MspInit(I2C_TypeDef* instance)
 {
-	// TODO: Change the code to point to this processor's pins and ports
+	// TODO: Conditionals to process each of
 
 
-	_hi2c->Instance = instance;
+	_i2c_device.Handle->Instance = instance;
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
@@ -417,12 +432,13 @@ uint32_t GetI2CClockFreq(void) {
  * Sample code
  *
  * */
-HAL_StatusTypeDef init_i2c(I2C_HandleTypeDef* I2cHandle) //, I2C_TypeDef* _I2Cx )
+HAL_StatusTypeDef init_i2c(I2C_HandleTypeDef* I2cHandle, uint16_t address) //, I2C_TypeDef* _I2Cx )
 {
 	HAL_StatusTypeDef result = HAL_OK;
 
-	// If the Instance is Ready, don't Init
-	if(HAL_I2C_IsDeviceReady(_hi2c, _i2c_device.Address, I2C_TRIALS, I2C_TIMEOUT) == HAL_OK)
+
+
+	if(HAL_I2C_IsDeviceReady(I2cHandle, address, I2C_TRIALS, I2C_TIMEOUT) == HAL_OK)
 		return (result);
 
 	// TODO: This overrides the settings from the CubeMX

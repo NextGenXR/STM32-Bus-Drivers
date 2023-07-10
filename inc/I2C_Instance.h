@@ -8,15 +8,18 @@
 #ifndef DRIVERS_BSP_STM32_BUS_DRIVERS_I2C_INSTANCE_H_
 #define DRIVERS_BSP_STM32_BUS_DRIVERS_I2C_INSTANCE_H_
 
-/**
- * This class takes the I2C1, I2C2, etc, instance macro and initializes the peripheral
- */
+#include <stm32yyxx_hal_def.h>
 
+#ifndef I2C_TRIALS
+#define I2C_TRIALS 5
+#endif
 
-void I2C_Init(I2C_HandleTypeDef* hi2c, I2C_InitTypeDef* init);
-void I2C_Init(I2C_TypeDef* instance, I2C_InitTypeDef* init);
+#ifndef I2C_TIMEOUT
+#define I2C_TiMEout 1000
+#endif
 
-
+	void init_I2C_Instance(I2C_TypeDef* instance);
+	void deinit_2C_Instance(I2C_TypeDef* instance);
 
 	HAL_StatusTypeDef init_i2c(I2C_HandleTypeDef* I2cHandle);
 
@@ -26,6 +29,5 @@ void I2C_Init(I2C_TypeDef* instance, I2C_InitTypeDef* init);
 	void I2C_MspInit(I2C_HandleTypeDef* i2cHandle);
 	void I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle);
 
-};
 
 #endif /* DRIVERS_BSP_STM32_BUS_DRIVERS_I2C_INSTANCE_H_ */
