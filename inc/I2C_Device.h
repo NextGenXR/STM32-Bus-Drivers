@@ -57,6 +57,7 @@ public:
 	bool detected(void);
 
 	uint8_t scan_addresses(I2C_AddressTypeDef* validAddresses);
+	bool check_address(uint8_t address);
 
 	bool read(BufferTypeDef buffer, LengthTypeDef len = 1, bool stop = true);
 	bool write(BufferTypeDef buffer, LengthTypeDef len = 1, bool stop = true, BufferTypeDef prefix_buffer = NULL,
@@ -64,6 +65,7 @@ public:
 	bool write_then_read(BufferTypeDef write_buffer, LengthTypeDef write_len, BufferTypeDef read_buffer,
 			LengthTypeDef read_len, bool stop = false);
 	bool set_speed(uint32_t desiredclk);
+
 
 private:
 	bool _begun;
@@ -82,10 +84,6 @@ private:
 
 	bool _read(BufferTypeDef *buffer, LengthTypeDef len, bool stop);
 	void wait_transfer(uint32_t timeout);
-
-	void SetI2CTiming(uint32_t desiredSpeed);
-	uint32_t GetI2CClockFreq(void);
-	void I2C_Init(I2C_HandleTypeDef* hi2c, I2C_TypeDef* i2cx, I2C_InitTypeDef* init);
 
 	I2C_DeviceTypeDef _i2c_device;
 	HAL_StatusTypeDef transmit_hal_i2c(BufferTypeDef pData, LengthTypeDef Size);
